@@ -51,22 +51,7 @@ public class UniformCostSearchAlgo implements ISearchAlgo {
         Node startNode = execute(root, start);
         startNode.setParent(null);
         startNode.setPathCost(0);
-        priorityQueue.add(startNode);
-        Set<Node> explored = new HashSet<>();
 
-        while (!priorityQueue.isEmpty()) {
-            Node currentNode = priorityQueue.poll();
-            if (currentNode.getLabel().equals(goal)) return currentNode;
-            explored.add(currentNode);
-            for (Node child : currentNode.getChildrenNodes()) {
-                if (child != null) {
-                    child.setParent(currentNode);
-                    if (!priorityQueue.contains(child) && !explored.contains(child)) {
-                        priorityQueue.add(child);
-                    }
-                }
-            }
-        }
-        return null;
+        return execute(startNode, goal);
     }
 }
