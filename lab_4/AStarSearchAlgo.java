@@ -3,6 +3,8 @@ package lab_4;
 import java.util.*;
 
 public class AStarSearchAlgo implements IInformedSearchAlgo {
+    private double hReal;
+
     private Comparator<Node> nodeComparatorByH_G() {
         return new Comparator<Node>() {
             @Override
@@ -37,11 +39,11 @@ public class AStarSearchAlgo implements IInformedSearchAlgo {
             for (Edge edge : parent.getChildren()) {
                 Node child = edge.getEnd();
                 double newG = parent.getG() + edge.getWeight();
-                if(!explored.contains(child)){
-                    if(frontier.contains(child) && child.getG() > newG){
+                if (!explored.contains(child)) {
+                    if (frontier.contains(child) && child.getG() > newG) {
                         frontier.remove(child);
                     }
-                    if(!frontier.contains(child)){
+                    if (!frontier.contains(child)) {
                         child.setG(newG);
                         child.setParent(parent);
                         frontier.add(child);
@@ -54,6 +56,28 @@ public class AStarSearchAlgo implements IInformedSearchAlgo {
 
     @Override
     public Node execute(Node root, String start, String goal) {
-        return null;
+        Node startNode = execute(root, start);
+        startNode.setParent(null);
+        startNode.setH(0);
+        return execute(startNode, goal);
+    }
+
+    @Override
+    public boolean isAdmissible(Node root, String goal) {
+        List<Node> result = new LinkedList<>() {
+        };
+        Node node = execute(root, goal);
+        result.add(node);
+        Node tmp;
+        while ((tmp = node.getParent()) != null) {
+            hReal += tmp.getH();
+            result.add(tmp);
+            node = tmp;
+        }
+        Collections.reverse(result);
+        for (Node n : result) {
+            if (n.getH() > hReal) return false;
+        }
+        return true;
     }
 }

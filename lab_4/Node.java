@@ -9,7 +9,6 @@ public class Node {
     private Node parent; // for print the path from the start node to goal node
     private double g;// from Start to this node
     private double h;// from this node to the goal
-    private double g_h;
     private List<Edge> children = new ArrayList<Edge>();
 
     public Node(String label) {
@@ -75,14 +74,6 @@ public class Node {
 
     public void setH(double h) {
         this.h = h;
-    }
-
-    public double getG_h() {
-        return this.g_h;
-    }
-
-    public void setG_h(double g_h) {
-        this.g_h = g_h;
     }
 
     @Override

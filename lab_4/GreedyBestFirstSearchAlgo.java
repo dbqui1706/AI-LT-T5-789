@@ -3,6 +3,8 @@ package lab_4;
 import java.util.*;
 
 public class GreedyBestFirstSearchAlgo implements IInformedSearchAlgo {
+    private double hReal;
+
     private Comparator<Node> greedyBSFComparator() {
         return new Comparator<Node>() {
             @Override
@@ -46,6 +48,26 @@ public class GreedyBestFirstSearchAlgo implements IInformedSearchAlgo {
     public Node execute(Node root, String start, String goal) {
         Node startNode = execute(root, start);
         startNode.setParent(null);
+        startNode.setH(0);
         return execute(startNode, goal);
+    }
+
+    @Override
+    public boolean isAdmissible(Node root, String goal) {
+        List<Node> result = new LinkedList<>() {
+        };
+        Node node = execute(root, goal);
+        result.add(node);
+        Node tmp;
+        while ((tmp = node.getParent()) != null) {
+            hReal += tmp.getH();
+            result.add(tmp);
+            node = tmp;
+        }
+        Collections.reverse(result);
+        for (Node n: result){
+            if (n.getH() > hReal) return false;
+        }
+        return true;
     }
 }
