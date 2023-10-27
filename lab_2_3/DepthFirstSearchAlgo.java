@@ -1,23 +1,24 @@
-package lab_2;
+package lab_2_3;
 
 import java.util.*;
 
-public class BreadthFirstSearchAlgo implements ISearchAlgo {
-
+public class DepthFirstSearchAlgo implements ISearchAlgo {
     @Override
     public Node execute(Node root, String goal) {
-        Queue<Node> frontier = new LinkedList<>();
+        Stack<Node> frontier = new Stack<>();
         frontier.add(root);
+
         Set<Node> explored = new HashSet<>();
 
         while (!frontier.isEmpty()) {
-            Node currentNode = frontier.poll();
-
+            Node currentNode = frontier.pop();
             if (currentNode.getLabel().equals(goal)) {
                 return currentNode;
             }
             explored.add(currentNode);
-            for (Node child : currentNode.getChildrenNodes()) {
+            List<Node> children = currentNode.getChildrenNodes();
+            Collections.reverse(children);
+            for (Node child : children) {
                 if (child != null && !frontier.contains(child) && !explored.contains(child)) {
                     frontier.add(child);
                     child.setParent(currentNode);
@@ -35,10 +36,10 @@ public class BreadthFirstSearchAlgo implements ISearchAlgo {
     }
 
     public Node executeTreeSearch(Node root, String goal) {
-        Queue<Node> queue = new LinkedList<>();
+        Stack<Node> queue = new Stack<>();
         queue.add(root);
         while (!queue.isEmpty()) {
-            Node currentNode = queue.poll();
+            Node currentNode = queue.pop();
             if (currentNode.getLabel().equals(goal)) return currentNode;
             for (Node child : currentNode.getChildrenNodes()) {
                 child.setParent(currentNode);
@@ -47,10 +48,10 @@ public class BreadthFirstSearchAlgo implements ISearchAlgo {
         }
         return null;
     }
-
     public Node executeTreeSearch(Node root, String start, String goal) {
         Node startNode = executeTreeSearch(root, start);
         startNode.setParent(null);
+
         return executeTreeSearch(startNode, goal);
     }
 }

@@ -1,4 +1,4 @@
-package lab_2;
+package lab_2_3;
 
 public interface ISearchAlgo {
 	public Node execute(Node root, String goal);// find the path from root node to the goal node

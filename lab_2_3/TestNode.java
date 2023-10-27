@@ -1,4 +1,4 @@
-package lab_2;
+package lab_2_3;
 
 public class TestNode {
     public static void main(String[] args) {
@@ -28,9 +28,9 @@ public class TestNode {
 
 
         Node ex2 = NodeUtils.dummy();
-        System.out.println("No recursive DLS: " + NodeUtils.printPath(algo4.noRecursiveDLS(ex2,"Goal", 9)));
+//        System.out.println("No recursive DLS: " + NodeUtils.printPath(algo4.noRecursiveDLS(ex2,"Goal", 9)));
 //        System.out.println("DLS: " + NodeUtils.printPath(algo3.execute(ex2, "Goal")));
-//        System.out.println("UniformCost: " + NodeUtils.printPath(algo3.execute(nodeS, "G")));
+        System.out.println("UniformCost: " + NodeUtils.printPath(algo3.execute(nodeS, "G")));
 //        System.out.println("UniformCost: " + NodeUtils.printPath(algo3.execute(nodeS, "G")));
 
 //        System.out.println("Deep limited search: " + NodeUtils.printPath(algo4.execute(nodeS, "G", 3)));

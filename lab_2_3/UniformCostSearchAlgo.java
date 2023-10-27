@@ -1,4 +1,4 @@
-package lab_2;
+package lab_2_3;
 
 import java.util.*;
 
@@ -7,7 +7,12 @@ public class UniformCostSearchAlgo implements ISearchAlgo {
         return new Comparator<Node>() {
             @Override
             public int compare(Node o1, Node o2) {
-                return Double.compare(o1.getPathCost(), o2.getPathCost());
+                double result = o1.getPathCost() - o2.getPathCost();
+                if (result == 0) {
+                    return o1.compareTo(o2);
+                } else {
+                    return (result > 0) ? (1) : (-1);
+                }
             }
         };
     }
@@ -27,18 +32,17 @@ public class UniformCostSearchAlgo implements ISearchAlgo {
 
             for (Edge child : currentNode.getChildren()) {
                 Node childNode = child.getEnd();
-                double oldCost = childNode.getPathCost();
-                childNode.setPathCost(currentNode.getPathCost() + child.getWeight());
-                childNode.setParent(currentNode);
-                double newCost = childNode.getPathCost();
+                double newCost = childNode.getPathCost() + currentNode.getPathCost();
 
                 if (!priorityQueue.contains(childNode) || !explored.contains(childNode)) {
+                    childNode.setParent(currentNode);
+                    childNode.setPathCost(currentNode.getPathCost() + child.getWeight());
                     priorityQueue.add(childNode);
-                } else if (priorityQueue.contains(childNode) && newCost < oldCost) {
+                }
+                if (priorityQueue.contains(childNode) && newCost < childNode.getPathCost()) {
                     priorityQueue.remove(childNode);
                     priorityQueue.add(childNode);
                 }
-
             }
         }
         return null;
@@ -46,12 +50,9 @@ public class UniformCostSearchAlgo implements ISearchAlgo {
 
     @Override
     public Node execute(Node root, String start, String goal) {
-        PriorityQueue<Node> priorityQueue = new PriorityQueue<>(comparatorPathCost());
-        root.setPathCost(0);
         Node startNode = execute(root, start);
         startNode.setParent(null);
-        startNode.setPathCost(0);
-
+//        startNode.setPathCost(0);
         return execute(startNode, goal);
     }
 }
