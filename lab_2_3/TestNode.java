@@ -31,13 +31,13 @@ public class TestNode {
 //        System.out.println("No recursive DLS: " + NodeUtils.printPath(algo4.noRecursiveDLS(ex2,"Goal", 9)));
 //        System.out.println("DLS: " + NodeUtils.printPath(algo3.execute(ex2, "Goal")));
         System.out.println("UniformCost: " + NodeUtils.printPath(algo3.execute(nodeS, "G")));
-//        System.out.println("UniformCost: " + NodeUtils.printPath(algo3.execute(nodeS, "G")));
+        System.out.println("UniformCost: " + NodeUtils.printPath(algo3.execute(nodeS, "G")));
 
-//        System.out.println("Deep limited search: " + NodeUtils.printPath(algo4.execute(nodeS, "G", 3)));
-//        System.out.println("BFS: " + NodeUtils.printPath(algo1.execute(nodeS, "G")));
-//        System.out.println("BFS: " + NodeUtils.printPath(algo1.execute(nodeS, "A", "H")));
-//        System.out.println("DFS: " + NodeUtils.printPath(algo2.execute(nodeS, "G")));
-//        System.out.println("DFS: " + NodeUtils.printPath(algo2.execute(nodeS, "A", "H")));
-//        System.out.println(nodeS.getChildren());
+        System.out.println("Deep limited search: " + NodeUtils.printPath(algo4.execute(nodeS, "G", 3)));
+        System.out.println("BFS: " + NodeUtils.printPath(algo1.execute(nodeS, "G")));
+        System.out.println("BFS: " + NodeUtils.printPath(algo1.execute(nodeS, "A", "H")));
+        System.out.println("DFS: " + NodeUtils.printPath(algo2.execute(nodeS, "G")));
+        System.out.println("DFS: " + NodeUtils.printPath(algo2.execute(nodeS, "A", "H")));
+        System.out.println(nodeS.getChildren());
     }
 }

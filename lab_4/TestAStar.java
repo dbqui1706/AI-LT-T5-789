@@ -15,7 +15,7 @@ public class TestAStar {
         s.addEdge(a, 2);
         a.addEdge(c, 3);
         b.addEdge(d, 3);
-        b.addEdge(c, 1);
+        b.addEdge(c, 4);
         c.addEdge(e, 3);
         c.addEdge(d, 1);
         d.addEdge(f, 2);
@@ -25,10 +25,10 @@ public class TestAStar {
 		IInformedSearchAlgo greedyBFS = new GreedyBestFirstSearchAlgo();
 //		Node res = greedyBFS.execute(s, "G");
 //		System.out.println("Greedy BFS: " + NodeUtils.printPath(res));
-        System.out.println("Admissible: " + greedyBFS.isAdmissible(s, "G"));
-//        IInformedSearchAlgo aStar = new AStarSearchAlgo();
-//        Node resAStart = aStar.execute(s, "B", g.getLabel());
-//        System.out.println("AStart: " + NodeUtils.printPath(resAStart));
+//        System.out.println("Admissible: " + greedyBFS.isAdmissible(s, "G"));
+        IInformedSearchAlgo aStar = new AStarSearchAlgo();
+        Node resAStart = aStar.execute(s, g.getLabel());
+        System.out.println("AStart: " + NodeUtils.printPath(resAStart));
 
     }
 }
