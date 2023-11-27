@@ -21,7 +21,7 @@ public class GA_NQueenAlgo {
         }
     }
 
-    public Node execute() {
+    public Node execute(){
         // Enter your code here
         initPopulation();
         List<Node> newPopulation = new ArrayList<Node>();
@@ -32,7 +32,7 @@ public class GA_NQueenAlgo {
                 Node y = this.getParentByTournamentSelection();
                 Node child = this.reproduce(x, y);
                 if (Math.random() < MUTATION_RATE) {
-                    count++;
+                    ++count;
                     mutate(child);
                 }
                 if (child.getH() == 0) {
@@ -41,7 +41,7 @@ public class GA_NQueenAlgo {
                 } else newPopulation.add(child);
             }
         }
-        System.out.println("MAX_ITERATIONS " + MAX_ITERATIONS + ": " + count + " mutate");
+//        System.out.println("MAX_ITERATIONS " + MAX_ITERATIONS + ": " + count + " mutate");
         population = newPopulation;
         Collections.sort(population, new Comparator<Node>() {
             @Override
@@ -76,10 +76,10 @@ public class GA_NQueenAlgo {
         int c = rd.nextInt(0, n);
         Queen[] state = new Queen[Node.N];
         for (int i = 0; i <= c; i++) {
-            state[i] = x.getState()[i];
+            state[i] = (Queen) x.getState()[i].clone();
         }
         for (int i = c + 1; i < n; i++) {
-            state[i] = y.getState()[i];
+            state[i] = (Queen) y.getState()[i].clone();
         }
         return new Node(state);
     }
